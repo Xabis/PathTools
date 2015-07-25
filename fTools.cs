@@ -121,8 +121,6 @@ namespace TriDelta.PathTools {
 
                delta = p2 - p1;
 
-               //FloorSlopeAngleXY = General.ClampAngle((float)Math.Round(Angle2D.RadToDeg(s.FloorSlope.GetAngleXY()) - 180, 1));
-
                if (chkAdjustAngle.Checked)
                   current.Rotate(delta.GetAngleXY());
 
@@ -141,37 +139,7 @@ namespace TriDelta.PathTools {
          }
       }
 
-
-//// Interpolate between p2 and p3 along a Catmull-Rom spline
-//// http://research.microsoft.com/~hollasch/cgindex/curves/catmull-rom.html
-//float APathFollower::Splerp (float p1, float p2, float p3, float p4)
-//{
-//   float t = Time;
-//   float res = 2*p2;
-//   res += (p3 - p1) * Time;
-//   t *= Time;
-//   res += (2*p1 - 5*p2 + 4*p3 - p4) * t;
-//   t *= Time;
-//   res += (3*p2 - 3*p3 + p4 - p1) * t;
-//   return 0.5f * res;
-//}
-
-
-
-      //x = FLOAT2FIXED(Splerp (FIXED2FLOAT(PrevNode->x), FIXED2FLOAT(CurrNode->x),
-      //                  FIXED2FLOAT(CurrNode->Next->x), FIXED2FLOAT(CurrNode->Next->Next->x)));
-      //y = FLOAT2FIXED(Splerp (FIXED2FLOAT(PrevNode->y), FIXED2FLOAT(CurrNode->y),
-      //                  FIXED2FLOAT(CurrNode->Next->y), FIXED2FLOAT(CurrNode->Next->Next->y)));
-      //z = FLOAT2FIXED(Splerp (FIXED2FLOAT(PrevNode->z), FIXED2FLOAT(CurrNode->z),
-      //                  FIXED2FLOAT(CurrNode->Next->z), FIXED2FLOAT(CurrNode->Next->Next->z)));
-
-
-   //q(t) = 0.5 * ((-p1 + 3*p2 -3*p3 + p4)*t*t*t
-   //            + (2*p1 -5*p2 + 4*p3 - p4)*t*t
-   //            + (-p1+p3)*t
-   //            + 2*p2)
-
-
+      //interpolation functions ripped straight from zdoom
       private float splerp(float t, float p1, float p2, float p3, float p4) {
          float t2 = t;
          float res = 2*p2;
@@ -205,8 +173,6 @@ namespace TriDelta.PathTools {
             if (!float.TryParse(txtAngleOffset.Text, out angleoffset))
                return;
 
-            //PathNode startnode = path[0];
-            //PathNode endnode = path[path.Count - 1];
             Vector3D p1, p2, delta;
             float leftover = 0;
 
