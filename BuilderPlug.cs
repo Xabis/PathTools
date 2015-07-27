@@ -135,7 +135,13 @@ namespace TriDelta.PathTools {
 
         public Vector3D Position
         {
-            get { return paththing.Position; }
+            get {
+
+               Vector3D location = paththing.Position;
+               if (paththing.Sector != null)
+                  location.z += Sector.GetFloorPlane(paththing.Sector).GetZ(location);
+               return location;
+            }
         }
 
         public int TravelTime

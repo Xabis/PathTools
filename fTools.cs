@@ -163,6 +163,10 @@ namespace TriDelta.PathTools {
 
          List<PathNode> path = GetPath((PathNode)lstPathPoints.SelectedItem);
          if (path.Count > 1) {
+
+            foreach (PathNode n in path)
+               n.Thing.DetermineSector();
+
             int type;
             float interval, angleoffset;
 
@@ -271,6 +275,7 @@ namespace TriDelta.PathTools {
                      for (int j = 0; j < cnt; j++) {
                         newlen = offset + (interval * j);
 
+                        //position is given in absolute Z, in order to handle varying sector floor heights
                         t = newlen / length;
                         Vector3D pos = new Vector3D(
                            splerp(t, last.Position.x, current.Position.x, current.Next.Position.x, current.Next.Next.Position.x),
@@ -282,6 +287,12 @@ namespace TriDelta.PathTools {
                         General.Settings.ApplyDefaultThingSettings(newthing);
 
                         newthing.Type = type;
+                        newthing.Move(pos);
+
+                        //convert absolute z back to sector z
+                        newthing.DetermineSector();
+                        if (newthing.Sector != null)
+                           pos.z -= Sector.GetFloorPlane(newthing.Sector).GetZ(pos);
                         newthing.Move(pos);
 
                         if (lastthing != null) {
