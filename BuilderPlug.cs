@@ -196,7 +196,7 @@ namespace TriDelta.PathTools {
             {
                 if (t.Type == 9070) {
                     if (dic.ContainsKey(t.Tag))
-                        return;
+                        break;
                     dic.Add(t.Tag, new PathNode(t));
                 }
             }

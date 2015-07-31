@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CodeImp.DoomBuilder.Windows;
 
 namespace TriDelta.PathTools {
    public partial class fTools : Form {
@@ -27,15 +28,27 @@ namespace TriDelta.PathTools {
          PopulatePathList();
       }
 
+      protected override void OnClosing(CancelEventArgs e) {
+         e.Cancel = true;
+         base.OnClosing(e);
+         this.Hide();
+      }
+
       private void PopulatePathList() {
+         PathNode lastselected = (PathNode)lstPathPoints.SelectedItem;
+
          lstPathPoints.Items.Clear();
          foreach (PathNode node in nodes) {
-            if (node.Next != null)
+            if (node.Next != null) {
                lstPathPoints.Items.Add(node);
+               if (lastselected != null && lastselected.Index == node.Index)
+                  lstPathPoints.SelectedItem = node;
+            }
          }
 
-         if (lstPathPoints.Items.Count > 0)
+         if (lstPathPoints.Items.Count > 0 && lstPathPoints.SelectedItem == null) {
             lstPathPoints.SelectedIndex = 0;
+         }
       }
 
       private void nodes_NodesChanged() {
@@ -327,10 +340,46 @@ namespace TriDelta.PathTools {
             }
             General.Map.ThingsFilter.Update();  
             General.Interface.RedrawDisplay();
-            General.Interface.DisplayStatus(CodeImp.DoomBuilder.Windows.StatusType.Action, "Create things complete.");
+            General.Interface.DisplayStatus(StatusType.Action, "Create things complete.");
          } else {
             MessageBox.Show("Path must have at least 2 points.");
          }
+      }
+
+      private void cmdDeleteThings_Click(object sender, EventArgs e) {
+         int type, start, end;
+
+         if (!int.TryParse(txtDeleteStart.Text, out start))
+            return;
+         if (!int.TryParse(txtDeleteEnd.Text, out end))
+            return;
+         if (!int.TryParse(txtDeleteFilter.Text, out type))
+            return;
+
+         if (start > end)
+            return;
+         if (end > General.Map.Map.Things.Count)
+            return;
+
+         General.Map.UndoRedo.CreateUndo("Delete thing");
+			General.Map.Map.BeginAddRemove(); //mxd
+
+         int cnt = 0;
+         for (var i = end; i >= start; i--) {
+            Thing t = General.Map.Map.GetThingByIndex(i);
+            if (t != null && (type == 0 || t.Type == type)) {
+               cnt++;
+               t.Dispose();
+            }
+         }
+
+         General.Map.Map.EndAddRemove(); //mxd
+         General.Interface.DisplayStatus(StatusType.Action, "Deleted " + cnt + " things.");
+				
+			// Update cache values
+			General.Map.IsChanged = true;
+			General.Map.ThingsFilter.Update();
+         General.Interface.RedrawDisplay();
       }
    }
 }
