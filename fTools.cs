@@ -80,7 +80,7 @@ namespace TriDelta.PathTools {
          List<PathNode> path = new List<PathNode>();
          do {
             if (current.Next != null) {
-               float length = (current.Position - current.Next.Position).GetLength();
+               float length = (current.Next.Position - current.Position).GetLength();
                current.TravelTime = (int)Math.Round(length * ticsperunit);
                if (current.TravelTime < 1)
                   current.TravelTime = 1;
@@ -90,6 +90,8 @@ namespace TriDelta.PathTools {
             current = current.Next;
          } while (current != null && !path.Contains(current));
 
+			General.Map.IsChanged = true;
+			General.Map.ThingsFilter.Update();
          General.Interface.DisplayStatus(CodeImp.DoomBuilder.Windows.StatusType.Action, path.Count + " points in the path were adjusted to " + ticsperunit + " octtics for every one unit");
       }
 
@@ -176,10 +178,6 @@ namespace TriDelta.PathTools {
 
          List<PathNode> path = GetPath((PathNode)lstPathPoints.SelectedItem);
          if (path.Count > 1) {
-
-            foreach (PathNode n in path)
-               n.Thing.DetermineSector();
-
             int type;
             float interval, angleoffset;
 
@@ -380,6 +378,48 @@ namespace TriDelta.PathTools {
 			General.Map.IsChanged = true;
 			General.Map.ThingsFilter.Update();
          General.Interface.RedrawDisplay();
+      }
+
+
+      private List<Thing> GetThingsByTag(int tag) {
+         List<Thing> list = new List<Thing>();
+         foreach (Thing t in General.Map.Map.Things)
+            if (t.Tag == tag)
+               list.Add(t);
+
+         return list;
+      }
+
+      private void cmdRetag_Click(object sender, EventArgs e) {
+         int newtag;
+
+         if (lstPathPoints.SelectedItem == null) {
+            MessageBox.Show("You must select an interpolation point first.");
+            return;
+         }
+
+         if (!int.TryParse(txtRetagStart.Text, out newtag))
+            return;
+
+         List<PathNode> path = GetPath((PathNode)lstPathPoints.SelectedItem);
+         if (path.Count > 1) {
+            General.Map.UndoRedo.CreateUndo("Retag path");
+
+            List<Thing> usedtags;
+            foreach (PathNode current in path) {
+               current.Thing.Tag = newtag;
+               current.Thing.Args[3] = newtag + 1;
+               newtag++;
+            }
+			   General.Map.IsChanged = true;
+			   General.Map.ThingsFilter.Update();
+            General.Interface.RedrawDisplay();
+            General.Interface.DisplayStatus(CodeImp.DoomBuilder.Windows.StatusType.Action, "Nodes have been retagged.");
+            nodes.Update();
+         } else {
+            MessageBox.Show("Path must have at least 2 points.");
+         }
+
       }
    }
 }

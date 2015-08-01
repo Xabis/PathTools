@@ -55,16 +55,21 @@
          this.rApplyZNone = new System.Windows.Forms.RadioButton();
          this.label8 = new System.Windows.Forms.Label();
          this.groupBox1 = new System.Windows.Forms.GroupBox();
-         this.label9 = new System.Windows.Forms.Label();
-         this.txtDeleteStart = new System.Windows.Forms.TextBox();
-         this.label10 = new System.Windows.Forms.Label();
-         this.txtDeleteEnd = new System.Windows.Forms.TextBox();
-         this.label11 = new System.Windows.Forms.Label();
-         this.txtDeleteFilter = new System.Windows.Forms.TextBox();
          this.cmdDeleteThings = new System.Windows.Forms.Button();
+         this.txtDeleteFilter = new System.Windows.Forms.TextBox();
+         this.label11 = new System.Windows.Forms.Label();
+         this.txtDeleteEnd = new System.Windows.Forms.TextBox();
+         this.label10 = new System.Windows.Forms.Label();
+         this.txtDeleteStart = new System.Windows.Forms.TextBox();
+         this.label9 = new System.Windows.Forms.Label();
+         this.groupBox2 = new System.Windows.Forms.GroupBox();
+         this.txtRetagStart = new System.Windows.Forms.TextBox();
+         this.label12 = new System.Windows.Forms.Label();
+         this.cmdRetag = new System.Windows.Forms.Button();
          this.panel1.SuspendLayout();
          this.panel2.SuspendLayout();
          this.groupBox1.SuspendLayout();
+         this.groupBox2.SuspendLayout();
          this.SuspendLayout();
          // 
          // cmdAdjustSpeed
@@ -327,61 +332,12 @@
          this.groupBox1.Controls.Add(this.label10);
          this.groupBox1.Controls.Add(this.txtDeleteStart);
          this.groupBox1.Controls.Add(this.label9);
-         this.groupBox1.Location = new System.Drawing.Point(11, 274);
+         this.groupBox1.Location = new System.Drawing.Point(12, 342);
          this.groupBox1.Name = "groupBox1";
          this.groupBox1.Size = new System.Drawing.Size(261, 96);
          this.groupBox1.TabIndex = 24;
          this.groupBox1.TabStop = false;
          this.groupBox1.Text = "Thing Helpers";
-         // 
-         // label9
-         // 
-         this.label9.AutoSize = true;
-         this.label9.Location = new System.Drawing.Point(7, 20);
-         this.label9.Name = "label9";
-         this.label9.Size = new System.Drawing.Size(58, 13);
-         this.label9.TabIndex = 0;
-         this.label9.Text = "Index Start";
-         // 
-         // txtDeleteStart
-         // 
-         this.txtDeleteStart.Location = new System.Drawing.Point(10, 36);
-         this.txtDeleteStart.Name = "txtDeleteStart";
-         this.txtDeleteStart.Size = new System.Drawing.Size(78, 20);
-         this.txtDeleteStart.TabIndex = 1;
-         // 
-         // label10
-         // 
-         this.label10.AutoSize = true;
-         this.label10.Location = new System.Drawing.Point(92, 20);
-         this.label10.Name = "label10";
-         this.label10.Size = new System.Drawing.Size(26, 13);
-         this.label10.TabIndex = 2;
-         this.label10.Text = "End";
-         // 
-         // txtDeleteEnd
-         // 
-         this.txtDeleteEnd.Location = new System.Drawing.Point(94, 36);
-         this.txtDeleteEnd.Name = "txtDeleteEnd";
-         this.txtDeleteEnd.Size = new System.Drawing.Size(70, 20);
-         this.txtDeleteEnd.TabIndex = 3;
-         // 
-         // label11
-         // 
-         this.label11.AutoSize = true;
-         this.label11.Location = new System.Drawing.Point(167, 20);
-         this.label11.Name = "label11";
-         this.label11.Size = new System.Drawing.Size(56, 13);
-         this.label11.TabIndex = 4;
-         this.label11.Text = "Type Filter";
-         // 
-         // txtDeleteFilter
-         // 
-         this.txtDeleteFilter.Location = new System.Drawing.Point(170, 36);
-         this.txtDeleteFilter.Name = "txtDeleteFilter";
-         this.txtDeleteFilter.Size = new System.Drawing.Size(85, 20);
-         this.txtDeleteFilter.TabIndex = 5;
-         this.txtDeleteFilter.Text = "0";
          // 
          // cmdDeleteThings
          // 
@@ -393,11 +349,99 @@
          this.cmdDeleteThings.UseVisualStyleBackColor = true;
          this.cmdDeleteThings.Click += new System.EventHandler(this.cmdDeleteThings_Click);
          // 
+         // txtDeleteFilter
+         // 
+         this.txtDeleteFilter.Location = new System.Drawing.Point(170, 36);
+         this.txtDeleteFilter.Name = "txtDeleteFilter";
+         this.txtDeleteFilter.Size = new System.Drawing.Size(85, 20);
+         this.txtDeleteFilter.TabIndex = 5;
+         this.txtDeleteFilter.Text = "0";
+         // 
+         // label11
+         // 
+         this.label11.AutoSize = true;
+         this.label11.Location = new System.Drawing.Point(167, 20);
+         this.label11.Name = "label11";
+         this.label11.Size = new System.Drawing.Size(56, 13);
+         this.label11.TabIndex = 4;
+         this.label11.Text = "Type Filter";
+         // 
+         // txtDeleteEnd
+         // 
+         this.txtDeleteEnd.Location = new System.Drawing.Point(94, 36);
+         this.txtDeleteEnd.Name = "txtDeleteEnd";
+         this.txtDeleteEnd.Size = new System.Drawing.Size(70, 20);
+         this.txtDeleteEnd.TabIndex = 3;
+         // 
+         // label10
+         // 
+         this.label10.AutoSize = true;
+         this.label10.Location = new System.Drawing.Point(92, 20);
+         this.label10.Name = "label10";
+         this.label10.Size = new System.Drawing.Size(26, 13);
+         this.label10.TabIndex = 2;
+         this.label10.Text = "End";
+         // 
+         // txtDeleteStart
+         // 
+         this.txtDeleteStart.Location = new System.Drawing.Point(10, 36);
+         this.txtDeleteStart.Name = "txtDeleteStart";
+         this.txtDeleteStart.Size = new System.Drawing.Size(78, 20);
+         this.txtDeleteStart.TabIndex = 1;
+         // 
+         // label9
+         // 
+         this.label9.AutoSize = true;
+         this.label9.Location = new System.Drawing.Point(7, 20);
+         this.label9.Name = "label9";
+         this.label9.Size = new System.Drawing.Size(58, 13);
+         this.label9.TabIndex = 0;
+         this.label9.Text = "Index Start";
+         // 
+         // groupBox2
+         // 
+         this.groupBox2.Controls.Add(this.cmdRetag);
+         this.groupBox2.Controls.Add(this.label12);
+         this.groupBox2.Controls.Add(this.txtRetagStart);
+         this.groupBox2.Location = new System.Drawing.Point(12, 274);
+         this.groupBox2.Name = "groupBox2";
+         this.groupBox2.Size = new System.Drawing.Size(260, 62);
+         this.groupBox2.TabIndex = 25;
+         this.groupBox2.TabStop = false;
+         this.groupBox2.Text = "Retag Path";
+         // 
+         // txtRetagStart
+         // 
+         this.txtRetagStart.Location = new System.Drawing.Point(6, 32);
+         this.txtRetagStart.Name = "txtRetagStart";
+         this.txtRetagStart.Size = new System.Drawing.Size(167, 20);
+         this.txtRetagStart.TabIndex = 0;
+         // 
+         // label12
+         // 
+         this.label12.AutoSize = true;
+         this.label12.Location = new System.Drawing.Point(6, 16);
+         this.label12.Name = "label12";
+         this.label12.Size = new System.Drawing.Size(51, 13);
+         this.label12.TabIndex = 1;
+         this.label12.Text = "Start Tag";
+         // 
+         // cmdRetag
+         // 
+         this.cmdRetag.Location = new System.Drawing.Point(179, 30);
+         this.cmdRetag.Name = "cmdRetag";
+         this.cmdRetag.Size = new System.Drawing.Size(75, 23);
+         this.cmdRetag.TabIndex = 2;
+         this.cmdRetag.Text = "Retag";
+         this.cmdRetag.UseVisualStyleBackColor = true;
+         this.cmdRetag.Click += new System.EventHandler(this.cmdRetag_Click);
+         // 
          // fTools
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(284, 381);
+         this.ClientSize = new System.Drawing.Size(284, 450);
+         this.Controls.Add(this.groupBox2);
          this.Controls.Add(this.groupBox1);
          this.Controls.Add(this.panel2);
          this.Controls.Add(this.panel1);
@@ -427,6 +471,8 @@
          this.panel2.PerformLayout();
          this.groupBox1.ResumeLayout(false);
          this.groupBox1.PerformLayout();
+         this.groupBox2.ResumeLayout(false);
+         this.groupBox2.PerformLayout();
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -468,5 +514,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtDeleteStart;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button cmdRetag;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtRetagStart;
     }
 }
