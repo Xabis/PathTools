@@ -63,9 +63,9 @@
          this.txtDeleteStart = new System.Windows.Forms.TextBox();
          this.label9 = new System.Windows.Forms.Label();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
-         this.txtRetagStart = new System.Windows.Forms.TextBox();
-         this.label12 = new System.Windows.Forms.Label();
          this.cmdRetag = new System.Windows.Forms.Button();
+         this.label12 = new System.Windows.Forms.Label();
+         this.txtRetagStart = new System.Windows.Forms.TextBox();
          this.panel1.SuspendLayout();
          this.panel2.SuspendLayout();
          this.groupBox1.SuspendLayout();
@@ -200,7 +200,7 @@
          this.txtCreateInterval.Name = "txtCreateInterval";
          this.txtCreateInterval.Size = new System.Drawing.Size(41, 20);
          this.txtCreateInterval.TabIndex = 14;
-         this.txtCreateInterval.Text = "256";
+         this.txtCreateInterval.Text = "384";
          // 
          // label5
          // 
@@ -410,12 +410,15 @@
          this.groupBox2.TabStop = false;
          this.groupBox2.Text = "Retag Path";
          // 
-         // txtRetagStart
+         // cmdRetag
          // 
-         this.txtRetagStart.Location = new System.Drawing.Point(6, 32);
-         this.txtRetagStart.Name = "txtRetagStart";
-         this.txtRetagStart.Size = new System.Drawing.Size(167, 20);
-         this.txtRetagStart.TabIndex = 0;
+         this.cmdRetag.Location = new System.Drawing.Point(179, 30);
+         this.cmdRetag.Name = "cmdRetag";
+         this.cmdRetag.Size = new System.Drawing.Size(75, 23);
+         this.cmdRetag.TabIndex = 2;
+         this.cmdRetag.Text = "Retag";
+         this.cmdRetag.UseVisualStyleBackColor = true;
+         this.cmdRetag.Click += new System.EventHandler(this.cmdRetag_Click);
          // 
          // label12
          // 
@@ -426,15 +429,12 @@
          this.label12.TabIndex = 1;
          this.label12.Text = "Start Tag";
          // 
-         // cmdRetag
+         // txtRetagStart
          // 
-         this.cmdRetag.Location = new System.Drawing.Point(179, 30);
-         this.cmdRetag.Name = "cmdRetag";
-         this.cmdRetag.Size = new System.Drawing.Size(75, 23);
-         this.cmdRetag.TabIndex = 2;
-         this.cmdRetag.Text = "Retag";
-         this.cmdRetag.UseVisualStyleBackColor = true;
-         this.cmdRetag.Click += new System.EventHandler(this.cmdRetag_Click);
+         this.txtRetagStart.Location = new System.Drawing.Point(6, 32);
+         this.txtRetagStart.Name = "txtRetagStart";
+         this.txtRetagStart.Size = new System.Drawing.Size(167, 20);
+         this.txtRetagStart.TabIndex = 0;
          // 
          // fTools
          // 

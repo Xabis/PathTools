@@ -354,9 +354,9 @@ namespace TriDelta.PathTools {
          if (!int.TryParse(txtDeleteFilter.Text, out type))
             return;
 
+         if (end >= General.Map.Map.Things.Count)
+            end = General.Map.Map.Things.Count - 1;
          if (start > end)
-            return;
-         if (end > General.Map.Map.Things.Count)
             return;
 
          General.Map.UndoRedo.CreateUndo("Delete thing");
@@ -400,17 +400,31 @@ namespace TriDelta.PathTools {
 
          if (!int.TryParse(txtRetagStart.Text, out newtag))
             return;
+         if (newtag <= 0) {
+            MessageBox.Show("tag start must be 1 or higher");
+            return;
+         }
 
          List<PathNode> path = GetPath((PathNode)lstPathPoints.SelectedItem);
          if (path.Count > 1) {
             General.Map.UndoRedo.CreateUndo("Retag path");
 
-            List<Thing> usedtags;
-            foreach (PathNode current in path) {
+            PathNode current = null;
+            for (var i = 0; i < path.Count; i++) {
+               current = path[i];
                current.Thing.Tag = newtag;
-               current.Thing.Args[3] = newtag + 1;
+               if (current.Next != null) {
+                  current.NextID = newtag + 1;
+               } else {
+                  current.NextID = 0;
+               }
                newtag++;
             }
+
+            //reclose the loop
+            if (current.Next != null)
+               current.NextID = current.Next.ID;
+
 			   General.Map.IsChanged = true;
 			   General.Map.ThingsFilter.Update();
             General.Interface.RedrawDisplay();

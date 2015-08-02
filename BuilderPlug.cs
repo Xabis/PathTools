@@ -160,6 +160,7 @@ namespace TriDelta.PathTools {
         public int NextID
         {
             get { return paththing.Args[3]; }
+            set { paththing.Args[3] = value; }
         }
 
         public PathNode Next
