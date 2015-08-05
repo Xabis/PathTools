@@ -344,43 +344,6 @@ namespace TriDelta.PathTools {
          }
       }
 
-      private void cmdDeleteThings_Click(object sender, EventArgs e) {
-         int type, start, end;
-
-         if (!int.TryParse(txtDeleteStart.Text, out start))
-            return;
-         if (!int.TryParse(txtDeleteEnd.Text, out end))
-            return;
-         if (!int.TryParse(txtDeleteFilter.Text, out type))
-            return;
-
-         if (end >= General.Map.Map.Things.Count)
-            end = General.Map.Map.Things.Count - 1;
-         if (start > end)
-            return;
-
-         General.Map.UndoRedo.CreateUndo("Delete thing");
-			General.Map.Map.BeginAddRemove(); //mxd
-
-         int cnt = 0;
-         for (var i = end; i >= start; i--) {
-            Thing t = General.Map.Map.GetThingByIndex(i);
-            if (t != null && (type == 0 || t.Type == type)) {
-               cnt++;
-               t.Dispose();
-            }
-         }
-
-         General.Map.Map.EndAddRemove(); //mxd
-         General.Interface.DisplayStatus(StatusType.Action, "Deleted " + cnt + " things.");
-				
-			// Update cache values
-			General.Map.IsChanged = true;
-			General.Map.ThingsFilter.Update();
-         General.Interface.RedrawDisplay();
-      }
-
-
       private List<Thing> GetThingsByTag(int tag) {
          List<Thing> list = new List<Thing>();
          foreach (Thing t in General.Map.Map.Things)

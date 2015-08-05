@@ -54,21 +54,12 @@
          this.panel2 = new System.Windows.Forms.Panel();
          this.rApplyZNone = new System.Windows.Forms.RadioButton();
          this.label8 = new System.Windows.Forms.Label();
-         this.groupBox1 = new System.Windows.Forms.GroupBox();
-         this.cmdDeleteThings = new System.Windows.Forms.Button();
-         this.txtDeleteFilter = new System.Windows.Forms.TextBox();
-         this.label11 = new System.Windows.Forms.Label();
-         this.txtDeleteEnd = new System.Windows.Forms.TextBox();
-         this.label10 = new System.Windows.Forms.Label();
-         this.txtDeleteStart = new System.Windows.Forms.TextBox();
-         this.label9 = new System.Windows.Forms.Label();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
          this.cmdRetag = new System.Windows.Forms.Button();
          this.label12 = new System.Windows.Forms.Label();
          this.txtRetagStart = new System.Windows.Forms.TextBox();
          this.panel1.SuspendLayout();
          this.panel2.SuspendLayout();
-         this.groupBox1.SuspendLayout();
          this.groupBox2.SuspendLayout();
          this.SuspendLayout();
          // 
@@ -323,81 +314,6 @@
          this.label8.TabIndex = 22;
          this.label8.Text = "Apply Z Angle To";
          // 
-         // groupBox1
-         // 
-         this.groupBox1.Controls.Add(this.cmdDeleteThings);
-         this.groupBox1.Controls.Add(this.txtDeleteFilter);
-         this.groupBox1.Controls.Add(this.label11);
-         this.groupBox1.Controls.Add(this.txtDeleteEnd);
-         this.groupBox1.Controls.Add(this.label10);
-         this.groupBox1.Controls.Add(this.txtDeleteStart);
-         this.groupBox1.Controls.Add(this.label9);
-         this.groupBox1.Location = new System.Drawing.Point(12, 342);
-         this.groupBox1.Name = "groupBox1";
-         this.groupBox1.Size = new System.Drawing.Size(261, 96);
-         this.groupBox1.TabIndex = 24;
-         this.groupBox1.TabStop = false;
-         this.groupBox1.Text = "Thing Helpers";
-         // 
-         // cmdDeleteThings
-         // 
-         this.cmdDeleteThings.Location = new System.Drawing.Point(10, 62);
-         this.cmdDeleteThings.Name = "cmdDeleteThings";
-         this.cmdDeleteThings.Size = new System.Drawing.Size(75, 23);
-         this.cmdDeleteThings.TabIndex = 6;
-         this.cmdDeleteThings.Text = "Delete";
-         this.cmdDeleteThings.UseVisualStyleBackColor = true;
-         this.cmdDeleteThings.Click += new System.EventHandler(this.cmdDeleteThings_Click);
-         // 
-         // txtDeleteFilter
-         // 
-         this.txtDeleteFilter.Location = new System.Drawing.Point(170, 36);
-         this.txtDeleteFilter.Name = "txtDeleteFilter";
-         this.txtDeleteFilter.Size = new System.Drawing.Size(85, 20);
-         this.txtDeleteFilter.TabIndex = 5;
-         this.txtDeleteFilter.Text = "0";
-         // 
-         // label11
-         // 
-         this.label11.AutoSize = true;
-         this.label11.Location = new System.Drawing.Point(167, 20);
-         this.label11.Name = "label11";
-         this.label11.Size = new System.Drawing.Size(56, 13);
-         this.label11.TabIndex = 4;
-         this.label11.Text = "Type Filter";
-         // 
-         // txtDeleteEnd
-         // 
-         this.txtDeleteEnd.Location = new System.Drawing.Point(94, 36);
-         this.txtDeleteEnd.Name = "txtDeleteEnd";
-         this.txtDeleteEnd.Size = new System.Drawing.Size(70, 20);
-         this.txtDeleteEnd.TabIndex = 3;
-         // 
-         // label10
-         // 
-         this.label10.AutoSize = true;
-         this.label10.Location = new System.Drawing.Point(92, 20);
-         this.label10.Name = "label10";
-         this.label10.Size = new System.Drawing.Size(26, 13);
-         this.label10.TabIndex = 2;
-         this.label10.Text = "End";
-         // 
-         // txtDeleteStart
-         // 
-         this.txtDeleteStart.Location = new System.Drawing.Point(10, 36);
-         this.txtDeleteStart.Name = "txtDeleteStart";
-         this.txtDeleteStart.Size = new System.Drawing.Size(78, 20);
-         this.txtDeleteStart.TabIndex = 1;
-         // 
-         // label9
-         // 
-         this.label9.AutoSize = true;
-         this.label9.Location = new System.Drawing.Point(7, 20);
-         this.label9.Name = "label9";
-         this.label9.Size = new System.Drawing.Size(58, 13);
-         this.label9.TabIndex = 0;
-         this.label9.Text = "Index Start";
-         // 
          // groupBox2
          // 
          this.groupBox2.Controls.Add(this.cmdRetag);
@@ -440,9 +356,8 @@
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(284, 450);
+         this.ClientSize = new System.Drawing.Size(284, 346);
          this.Controls.Add(this.groupBox2);
-         this.Controls.Add(this.groupBox1);
          this.Controls.Add(this.panel2);
          this.Controls.Add(this.panel1);
          this.Controls.Add(this.label6);
@@ -469,8 +384,6 @@
          this.panel1.PerformLayout();
          this.panel2.ResumeLayout(false);
          this.panel2.PerformLayout();
-         this.groupBox1.ResumeLayout(false);
-         this.groupBox1.PerformLayout();
          this.groupBox2.ResumeLayout(false);
          this.groupBox2.PerformLayout();
          this.ResumeLayout(false);
@@ -506,14 +419,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton rApplyZNone;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button cmdDeleteThings;
-        private System.Windows.Forms.TextBox txtDeleteFilter;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtDeleteEnd;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtDeleteStart;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button cmdRetag;
         private System.Windows.Forms.Label label12;
