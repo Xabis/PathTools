@@ -17,6 +17,50 @@ namespace TriDelta.PathTools {
         public fTools(BuilderPlug p) {
             InitializeComponent();
             txtRetagStart.Text = General.Map.Map.GetNewTag().ToString();
+
+            chkAdjustAngle.Checked = General.Settings.ReadPluginSetting("adjangle", true);
+            chkAdjustPitch.Checked = General.Settings.ReadPluginSetting("adjpitch", true);
+            txtUnitTime.Text = General.Settings.ReadPluginSetting("adjtics", 8).ToString();
+            txtUnitLength.Text = General.Settings.ReadPluginSetting("adjlen", 1024).ToString();
+            txtCreateType.Text = General.Settings.ReadPluginSetting("thingtype", 1).ToString();
+            txtCreateInterval.Text = General.Settings.ReadPluginSetting("thinginterval", 256f).ToString();
+            txtAngleOffset.Text = General.Settings.ReadPluginSetting("thingaoffset", 0f).ToString();
+            txtHOffset.Text = General.Settings.ReadPluginSetting("thingheightoffset", 0f).ToString();
+            txtZOffset.Text = General.Settings.ReadPluginSetting("thingpitchoffset", 0f).ToString();
+            txtMassScale.Text = General.Settings.ReadPluginSetting("thingscale", 1.0f).ToString();
+            switch (General.Settings.ReadPluginSetting("thingplacement", 0))
+            {
+                case 1:
+                    rPlaceMiddle.Checked = true;
+                    break;
+                case 2:
+                    rPlaceTop.Checked = true;
+                    break;
+                default:
+                    rPlaceBottom.Checked = true;
+                    break;
+            }
+            switch (General.Settings.ReadPluginSetting("thingpathtype", 0))
+            {
+                case 1:
+                    rLineTypeLinear.Checked = true;
+                    break;
+                default:
+                    rLineTypeSpline.Checked = true;
+                    break;
+            }
+            switch (General.Settings.ReadPluginSetting("thingz", 0))
+            {
+                case 1:
+                    rApplyZRoll.Checked = true;
+                    break;
+                case 2:
+                    rApplyZNone.Checked = true;
+                    break;
+                default:
+                    rApplyZPitch.Checked = true;
+                    break;
+            }
         }
 
         private List<List<PathNode>> GetSelectedPaths() {
@@ -93,6 +137,9 @@ namespace TriDelta.PathTools {
                 return;
             float ticsperunit = (float)amount / (float)unit;
 
+            General.Settings.WritePluginSetting("adjtics", amount);
+            General.Settings.WritePluginSetting("adjlen", unit);
+
             foreach (List<PathNode> path in paths) {
                 if (path.Count < 2) {
                     General.WriteLogLine("Selected path starting at id #" + path[0].ID + " must have at least 2 points. Path ignored.");
@@ -129,6 +176,9 @@ namespace TriDelta.PathTools {
 
         private void cmdAdjustAngle_Click(object sender, EventArgs e) {
             bool undocreated = false;
+
+            General.Settings.WritePluginSetting("adjangle", chkAdjustAngle.Checked);
+            General.Settings.WritePluginSetting("adjpitch", chkAdjustPitch.Checked);
 
             List<List<PathNode>> paths = GetSelectedPaths();
             if (paths.Count == 0) {
@@ -213,7 +263,7 @@ namespace TriDelta.PathTools {
 
             int type;
             bool undocreated = false;
-            float interval, angleoffset, zoffset;
+            float interval, angleoffset, hoffset, zoffset;
 
             if (!int.TryParse(txtCreateType.Text, out type))
                 return;
@@ -221,8 +271,33 @@ namespace TriDelta.PathTools {
                 return;
             if (!float.TryParse(txtAngleOffset.Text, out angleoffset))
                 return;
+            if (!float.TryParse(txtHOffset.Text, out hoffset))
+                return;
             if (!float.TryParse(txtZOffset.Text, out zoffset))
                 return;
+
+
+            General.Settings.WritePluginSetting("thingtype", type);
+            General.Settings.WritePluginSetting("thinginterval", interval);
+            General.Settings.WritePluginSetting("thingaoffset", angleoffset);
+            General.Settings.WritePluginSetting("thingheightoffset", hoffset);
+            General.Settings.WritePluginSetting("thingpitchoffset", zoffset);
+            if (rPlaceMiddle.Checked)
+                General.Settings.WritePluginSetting("thingplacement", 1);
+            if (rPlaceTop.Checked)
+                General.Settings.WritePluginSetting("thingplacement", 2);
+            if (rPlaceBottom.Checked)
+                General.Settings.WritePluginSetting("thingplacement", 0);
+            if (rLineTypeLinear.Checked)
+                General.Settings.WritePluginSetting("thingpathtype", 1);
+            if (rLineTypeSpline.Checked)
+                General.Settings.WritePluginSetting("thingpathtype", 0);
+            if (rApplyZRoll.Checked)
+                General.Settings.WritePluginSetting("thingz", 1);
+            if (rApplyZNone.Checked)
+                General.Settings.WritePluginSetting("thingz", 2);
+            if (rApplyZPitch.Checked)
+                General.Settings.WritePluginSetting("thingz", 0);
 
             foreach (List<PathNode> path in paths) {
                 if (path.Count < 2) {
@@ -274,7 +349,7 @@ namespace TriDelta.PathTools {
                                     pos.z -= newthing.Height / 2;
                                 if (rPlaceTop.Checked)
                                     pos.z -= newthing.Height;
-                                pos.z += zoffset;
+                                pos.z += hoffset;
                                 newthing.Move(pos);
 
                                 //convert absolute z back to sector z
@@ -286,9 +361,9 @@ namespace TriDelta.PathTools {
                                 //apply angle/pitch/roll
                                 newthing.Rotate(delta.GetAngleXY() + Angle2D.DegToRad(angleoffset));
                                 if (rApplyZPitch.Checked)
-                                    newthing.SetPitch((int)Angle2D.RadToDeg(delta.GetAngleZ()));
+                                    newthing.SetPitch((int)(Angle2D.RadToDeg(delta.GetAngleZ()) - 90f + zoffset));
                                 if (rApplyZRoll.Checked)
-                                    newthing.SetRoll((int)Angle2D.RadToDeg(delta.GetAngleZ()));
+                                    newthing.SetRoll((int)(Angle2D.RadToDeg(delta.GetAngleZ()) + zoffset));
                             }
 
                             leftover = seglength % interval;
@@ -362,7 +437,7 @@ namespace TriDelta.PathTools {
                                     pos.z -= newthing.Height / 2;
                                 if (rPlaceTop.Checked)
                                     pos.z -= newthing.Height;
-                                pos.z += zoffset;
+                                pos.z += hoffset;
                                 newthing.Move(pos);
 
                                 //convert absolute z back to sector z
@@ -373,19 +448,16 @@ namespace TriDelta.PathTools {
 
                                 if (lastthing != null) {
                                     delta = newthing.Position - lastthing.Position;
-                                    newthing.Rotate(delta.GetAngleXY() + Angle2D.DegToRad(angleoffset));
-                                    if (rApplyZPitch.Checked)
-                                        newthing.SetPitch((int)Angle2D.RadToDeg(delta.GetAngleZ()));
-                                    if (rApplyZRoll.Checked)
-                                        newthing.SetRoll((int)Angle2D.RadToDeg(delta.GetAngleZ()));
                                 } else {
                                     delta = current.Position - last.Position;
-                                    newthing.Rotate(delta.GetAngleXY() + Angle2D.DegToRad(angleoffset));
-                                    if (rApplyZPitch.Checked)
-                                        newthing.SetPitch((int)Angle2D.RadToDeg(delta.GetAngleZ()));
-                                    if (rApplyZRoll.Checked)
-                                        newthing.SetRoll((int)Angle2D.RadToDeg(delta.GetAngleZ()));
                                 }
+
+                                newthing.Rotate(delta.GetAngleXY() + Angle2D.DegToRad(angleoffset));
+                                if (rApplyZPitch.Checked)
+                                    newthing.SetPitch((int)(Angle2D.RadToDeg(delta.GetAngleZ()) - 90f + zoffset));
+                                if (rApplyZRoll.Checked)
+                                    newthing.SetRoll((int)(Angle2D.RadToDeg(delta.GetAngleZ()) + zoffset));
+
                                 newthing.UpdateConfiguration();
                                 lastthing = newthing;
                             }
@@ -494,6 +566,8 @@ namespace TriDelta.PathTools {
                 return;
             }
 
+            General.Settings.WritePluginSetting("thingscale", scale);
+
             //parse list
             List<Vector3D> locations = new List<Vector3D>();
             foreach(string line in txtCoordList.Lines) {
@@ -545,6 +619,11 @@ namespace TriDelta.PathTools {
             General.Map.ThingsFilter.Update();
             General.Interface.RedrawDisplay();
             General.Interface.DisplayStatus(StatusType.Action, "Mass create points complete.");
+        }
+
+        private void rLineTypeLinear_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

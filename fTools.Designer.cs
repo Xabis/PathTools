@@ -69,11 +69,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.grpMassCreate = new System.Windows.Forms.GroupBox();
+            this.txtMassScale = new System.Windows.Forms.TextBox();
+            this.lblMassScale = new System.Windows.Forms.Label();
             this.chkMassLinkNodes = new System.Windows.Forms.CheckBox();
             this.txtCoordList = new System.Windows.Forms.TextBox();
             this.cmdCreateEnMasse = new System.Windows.Forms.Button();
-            this.lblMassScale = new System.Windows.Forms.Label();
-            this.txtMassScale = new System.Windows.Forms.TextBox();
+            this.txtHOffset = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.grpCreateThings.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -167,7 +168,7 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtRetagStart);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(3, 249);
+            this.groupBox2.Location = new System.Drawing.Point(3, 305);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(278, 62);
             this.groupBox2.TabIndex = 25;
@@ -202,6 +203,7 @@
             // 
             // grpCreateThings
             // 
+            this.grpCreateThings.Controls.Add(this.txtHOffset);
             this.grpCreateThings.Controls.Add(this.label11);
             this.grpCreateThings.Controls.Add(this.txtZOffset);
             this.grpCreateThings.Controls.Add(this.panel3);
@@ -218,7 +220,7 @@
             this.grpCreateThings.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpCreateThings.Location = new System.Drawing.Point(3, 100);
             this.grpCreateThings.Name = "grpCreateThings";
-            this.grpCreateThings.Size = new System.Drawing.Size(278, 149);
+            this.grpCreateThings.Size = new System.Drawing.Size(278, 205);
             this.grpCreateThings.TabIndex = 26;
             this.grpCreateThings.TabStop = false;
             this.grpCreateThings.Text = "Create Things";
@@ -226,7 +228,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(212, 16);
+            this.label11.Location = new System.Drawing.Point(194, 16);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(45, 13);
             this.label11.TabIndex = 36;
@@ -234,9 +236,9 @@
             // 
             // txtZOffset
             // 
-            this.txtZOffset.Location = new System.Drawing.Point(215, 32);
+            this.txtZOffset.Location = new System.Drawing.Point(192, 32);
             this.txtZOffset.Name = "txtZOffset";
-            this.txtZOffset.Size = new System.Drawing.Size(53, 20);
+            this.txtZOffset.Size = new System.Drawing.Size(39, 20);
             this.txtZOffset.TabIndex = 35;
             this.txtZOffset.Text = "0";
             // 
@@ -294,7 +296,7 @@
             // 
             // cmdSelectThingType
             // 
-            this.cmdSelectThingType.Location = new System.Drawing.Point(66, 30);
+            this.cmdSelectThingType.Location = new System.Drawing.Point(54, 30);
             this.cmdSelectThingType.Name = "cmdSelectThingType";
             this.cmdSelectThingType.Size = new System.Drawing.Size(36, 23);
             this.cmdSelectThingType.TabIndex = 33;
@@ -320,7 +322,6 @@
             this.rApplyZNone.Name = "rApplyZNone";
             this.rApplyZNone.Size = new System.Drawing.Size(51, 17);
             this.rApplyZNone.TabIndex = 23;
-            this.rApplyZNone.TabStop = true;
             this.rApplyZNone.Text = "None";
             this.rApplyZNone.UseVisualStyleBackColor = true;
             // 
@@ -336,10 +337,12 @@
             // rApplyZPitch
             // 
             this.rApplyZPitch.AutoSize = true;
+            this.rApplyZPitch.Checked = true;
             this.rApplyZPitch.Location = new System.Drawing.Point(4, 16);
             this.rApplyZPitch.Name = "rApplyZPitch";
             this.rApplyZPitch.Size = new System.Drawing.Size(49, 17);
             this.rApplyZPitch.TabIndex = 20;
+            this.rApplyZPitch.TabStop = true;
             this.rApplyZPitch.Text = "Pitch";
             this.rApplyZPitch.UseVisualStyleBackColor = true;
             // 
@@ -347,12 +350,10 @@
             // 
             this.rApplyZRoll.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
             this.rApplyZRoll.AutoSize = true;
-            this.rApplyZRoll.Checked = true;
             this.rApplyZRoll.Location = new System.Drawing.Point(56, 16);
             this.rApplyZRoll.Name = "rApplyZRoll";
             this.rApplyZRoll.Size = new System.Drawing.Size(43, 17);
             this.rApplyZRoll.TabIndex = 21;
-            this.rApplyZRoll.TabStop = true;
             this.rApplyZRoll.Text = "Roll";
             this.rApplyZRoll.UseVisualStyleBackColor = true;
             // 
@@ -396,28 +397,29 @@
             this.rLineTypeLinear.TabIndex = 16;
             this.rLineTypeLinear.Text = "Linear";
             this.rLineTypeLinear.UseVisualStyleBackColor = true;
+            this.rLineTypeLinear.CheckedChanged += new System.EventHandler(this.rLineTypeLinear_CheckedChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(157, 16);
+            this.label6.Location = new System.Drawing.Point(143, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 13);
+            this.label6.Size = new System.Drawing.Size(45, 13);
             this.label6.TabIndex = 30;
-            this.label6.Text = "Ang Offset";
+            this.label6.Text = "A Offset";
             // 
             // txtAngleOffset
             // 
-            this.txtAngleOffset.Location = new System.Drawing.Point(157, 32);
+            this.txtAngleOffset.Location = new System.Drawing.Point(143, 32);
             this.txtAngleOffset.Name = "txtAngleOffset";
-            this.txtAngleOffset.Size = new System.Drawing.Size(52, 20);
+            this.txtAngleOffset.Size = new System.Drawing.Size(43, 20);
             this.txtAngleOffset.TabIndex = 29;
             this.txtAngleOffset.Text = "90";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(109, 16);
+            this.label5.Location = new System.Drawing.Point(95, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(42, 13);
             this.label5.TabIndex = 28;
@@ -425,7 +427,7 @@
             // 
             // txtCreateInterval
             // 
-            this.txtCreateInterval.Location = new System.Drawing.Point(110, 32);
+            this.txtCreateInterval.Location = new System.Drawing.Point(96, 32);
             this.txtCreateInterval.Name = "txtCreateInterval";
             this.txtCreateInterval.Size = new System.Drawing.Size(41, 20);
             this.txtCreateInterval.TabIndex = 27;
@@ -435,9 +437,9 @@
             // 
             this.txtCreateType.Location = new System.Drawing.Point(6, 32);
             this.txtCreateType.Name = "txtCreateType";
-            this.txtCreateType.Size = new System.Drawing.Size(55, 20);
+            this.txtCreateType.Size = new System.Drawing.Size(42, 20);
             this.txtCreateType.TabIndex = 26;
-            this.txtCreateType.Text = "28001";
+            this.txtCreateType.Text = "1";
             // 
             // label4
             // 
@@ -504,12 +506,29 @@
             this.grpMassCreate.Controls.Add(this.txtCoordList);
             this.grpMassCreate.Controls.Add(this.cmdCreateEnMasse);
             this.grpMassCreate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpMassCreate.Location = new System.Drawing.Point(3, 311);
+            this.grpMassCreate.Location = new System.Drawing.Point(3, 367);
             this.grpMassCreate.Name = "grpMassCreate";
             this.grpMassCreate.Size = new System.Drawing.Size(278, 116);
             this.grpMassCreate.TabIndex = 28;
             this.grpMassCreate.TabStop = false;
             this.grpMassCreate.Text = "Mass Node Maker (paste coords)";
+            // 
+            // txtMassScale
+            // 
+            this.txtMassScale.Location = new System.Drawing.Point(197, 55);
+            this.txtMassScale.Name = "txtMassScale";
+            this.txtMassScale.Size = new System.Drawing.Size(75, 20);
+            this.txtMassScale.TabIndex = 4;
+            this.txtMassScale.Text = "1.0";
+            // 
+            // lblMassScale
+            // 
+            this.lblMassScale.AutoSize = true;
+            this.lblMassScale.Location = new System.Drawing.Point(197, 39);
+            this.lblMassScale.Name = "lblMassScale";
+            this.lblMassScale.Size = new System.Drawing.Size(34, 13);
+            this.lblMassScale.TabIndex = 3;
+            this.lblMassScale.Text = "Scale";
             // 
             // chkMassLinkNodes
             // 
@@ -540,28 +559,18 @@
             this.cmdCreateEnMasse.UseVisualStyleBackColor = true;
             this.cmdCreateEnMasse.Click += new System.EventHandler(this.cmdCreateEnMasse_Click);
             // 
-            // lblMassScale
+            // txtHOffset
             // 
-            this.lblMassScale.AutoSize = true;
-            this.lblMassScale.Location = new System.Drawing.Point(197, 39);
-            this.lblMassScale.Name = "lblMassScale";
-            this.lblMassScale.Size = new System.Drawing.Size(34, 13);
-            this.lblMassScale.TabIndex = 3;
-            this.lblMassScale.Text = "Scale";
-            // 
-            // txtMassScale
-            // 
-            this.txtMassScale.Location = new System.Drawing.Point(197, 55);
-            this.txtMassScale.Name = "txtMassScale";
-            this.txtMassScale.Size = new System.Drawing.Size(75, 20);
-            this.txtMassScale.TabIndex = 4;
-            this.txtMassScale.Text = "1.0";
+            this.txtHOffset.Location = new System.Drawing.Point(143, 163);
+            this.txtHOffset.Name = "txtHOffset";
+            this.txtHOffset.Size = new System.Drawing.Size(33, 20);
+            this.txtHOffset.TabIndex = 37;
             // 
             // fTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 432);
+            this.ClientSize = new System.Drawing.Size(284, 573);
             this.Controls.Add(this.grpMassCreate);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grpCreateThings);
@@ -636,5 +645,6 @@
         private System.Windows.Forms.Button cmdCreateEnMasse;
         private System.Windows.Forms.TextBox txtMassScale;
         private System.Windows.Forms.Label lblMassScale;
+        private System.Windows.Forms.TextBox txtHOffset;
     }
 }
