@@ -41,6 +41,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtRetagStart = new System.Windows.Forms.TextBox();
             this.grpCreateThings = new System.Windows.Forms.GroupBox();
+            this.txtHOffset = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtZOffset = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -74,7 +75,8 @@
             this.chkMassLinkNodes = new System.Windows.Forms.CheckBox();
             this.txtCoordList = new System.Windows.Forms.TextBox();
             this.cmdCreateEnMasse = new System.Windows.Forms.Button();
-            this.txtHOffset = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.grpCreateThings.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -168,7 +170,7 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtRetagStart);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(3, 305);
+            this.groupBox2.Location = new System.Drawing.Point(3, 246);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(278, 62);
             this.groupBox2.TabIndex = 25;
@@ -203,6 +205,8 @@
             // 
             // grpCreateThings
             // 
+            this.grpCreateThings.Controls.Add(this.label14);
+            this.grpCreateThings.Controls.Add(this.label13);
             this.grpCreateThings.Controls.Add(this.txtHOffset);
             this.grpCreateThings.Controls.Add(this.label11);
             this.grpCreateThings.Controls.Add(this.txtZOffset);
@@ -220,25 +224,33 @@
             this.grpCreateThings.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpCreateThings.Location = new System.Drawing.Point(3, 100);
             this.grpCreateThings.Name = "grpCreateThings";
-            this.grpCreateThings.Size = new System.Drawing.Size(278, 205);
+            this.grpCreateThings.Size = new System.Drawing.Size(278, 146);
             this.grpCreateThings.TabIndex = 26;
             this.grpCreateThings.TabStop = false;
             this.grpCreateThings.Text = "Create Things";
             // 
+            // txtHOffset
+            // 
+            this.txtHOffset.Location = new System.Drawing.Point(190, 32);
+            this.txtHOffset.Name = "txtHOffset";
+            this.txtHOffset.Size = new System.Drawing.Size(38, 20);
+            this.txtHOffset.TabIndex = 37;
+            this.txtHOffset.Text = "0";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(194, 16);
+            this.label11.Location = new System.Drawing.Point(231, 16);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(45, 13);
+            this.label11.Size = new System.Drawing.Size(14, 13);
             this.label11.TabIndex = 36;
-            this.label11.Text = "Z Offset";
+            this.label11.Text = "Z";
             // 
             // txtZOffset
             // 
-            this.txtZOffset.Location = new System.Drawing.Point(192, 32);
+            this.txtZOffset.Location = new System.Drawing.Point(234, 32);
             this.txtZOffset.Name = "txtZOffset";
-            this.txtZOffset.Size = new System.Drawing.Size(39, 20);
+            this.txtZOffset.Size = new System.Drawing.Size(38, 20);
             this.txtZOffset.TabIndex = 35;
             this.txtZOffset.Text = "0";
             // 
@@ -404,15 +416,15 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(143, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 13);
+            this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 30;
-            this.label6.Text = "A Offset";
+            this.label6.Text = "Angle";
             // 
             // txtAngleOffset
             // 
-            this.txtAngleOffset.Location = new System.Drawing.Point(143, 32);
+            this.txtAngleOffset.Location = new System.Drawing.Point(146, 32);
             this.txtAngleOffset.Name = "txtAngleOffset";
-            this.txtAngleOffset.Size = new System.Drawing.Size(43, 20);
+            this.txtAngleOffset.Size = new System.Drawing.Size(38, 20);
             this.txtAngleOffset.TabIndex = 29;
             this.txtAngleOffset.Text = "90";
             // 
@@ -506,7 +518,7 @@
             this.grpMassCreate.Controls.Add(this.txtCoordList);
             this.grpMassCreate.Controls.Add(this.cmdCreateEnMasse);
             this.grpMassCreate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpMassCreate.Location = new System.Drawing.Point(3, 367);
+            this.grpMassCreate.Location = new System.Drawing.Point(3, 308);
             this.grpMassCreate.Name = "grpMassCreate";
             this.grpMassCreate.Size = new System.Drawing.Size(278, 116);
             this.grpMassCreate.TabIndex = 28;
@@ -559,18 +571,29 @@
             this.cmdCreateEnMasse.UseVisualStyleBackColor = true;
             this.cmdCreateEnMasse.Click += new System.EventHandler(this.cmdCreateEnMasse_Click);
             // 
-            // txtHOffset
+            // label13
             // 
-            this.txtHOffset.Location = new System.Drawing.Point(143, 163);
-            this.txtHOffset.Name = "txtHOffset";
-            this.txtHOffset.Size = new System.Drawing.Size(33, 20);
-            this.txtHOffset.TabIndex = 37;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(187, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(38, 13);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "Height";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(143, 3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 13);
+            this.label14.TabIndex = 39;
+            this.label14.Text = "Offsets:";
             // 
             // fTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 573);
+            this.ClientSize = new System.Drawing.Size(284, 425);
             this.Controls.Add(this.grpMassCreate);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grpCreateThings);
@@ -646,5 +669,7 @@
         private System.Windows.Forms.TextBox txtMassScale;
         private System.Windows.Forms.Label lblMassScale;
         private System.Windows.Forms.TextBox txtHOffset;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }
