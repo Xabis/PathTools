@@ -141,28 +141,57 @@ namespace TriDelta.PathTools {
             General.Settings.WritePluginSetting("adjlen", unit);
 
             foreach (List<PathNode> path in paths) {
-                if (path.Count < 2) {
-                    General.WriteLogLine("Selected path starting at id #" + path[0].ID + " must have at least 2 points. Path ignored.");
-                    continue;
-                }
-                if (!undocreated) {
-                    undocreated = true;
-                    General.Map.UndoRedo.CreateUndo("Adjust path travel time");
-                }
-
-                PathNode current = path[0];
-                List<PathNode> dupelist = new List<PathNode>();
-                do {
-                    if (current.Next != null) {
-                        float length = (current.Next.Position - current.Position).GetLength();
-                        current.TravelTime = (int)Math.Round(length * ticsperunit);
-                        if (current.TravelTime < 1)
-                            current.TravelTime = 1;
-
-                        dupelist.Add(current);
+                if (rLineTypeLinear.Checked) {
+                    if (path.Count < 2) {
+                        General.WriteLogLine("Selected path starting at id #" + path[0].ID + " must have at least 2 points. Path ignored.");
+                        continue;
                     }
-                    current = current.Next;
-                } while (current != null && !dupelist.Contains(current));
+
+                    if (!undocreated) {
+                        undocreated = true;
+                        General.Map.UndoRedo.CreateUndo("Adjust path travel time");
+                    }
+
+                    PathNode current = path[0];
+                    List<PathNode> dupelist = new List<PathNode>();
+                    do {
+                        if (current.Next != null) {
+                            float length = (current.Next.Position - current.Position).GetLength();
+                            current.TravelTime = (int)Math.Round(length * ticsperunit);
+                            if (current.TravelTime < 1)
+                                current.TravelTime = 1;
+
+                            dupelist.Add(current);
+                        }
+                        current = current.Next;
+                    } while (current != null && !dupelist.Contains(current));
+                } else {
+                    if (path.Count < 4) {
+                        General.WriteLogLine("Selected path starting at id #" + path[0].ID + " must have at least 4 points in spline mode. Path ignored.");
+                        continue;
+                    }
+
+                    if (!undocreated) {
+                        undocreated = true;
+                        General.Map.UndoRedo.CreateUndo("Adjust path travel time");
+                    }
+
+                    PathNode last = path[0];
+                    PathNode current = path[1];
+                    List<PathNode> dupelist = new List<PathNode>();
+                    do {
+                        if (current.Next != null && current.Next.Next != null) {
+                            float length = MeasureArcLength(last);
+                            current.TravelTime = (int)Math.Round(length * ticsperunit);
+                            if (current.TravelTime < 1)
+                                current.TravelTime = 1;
+
+                            dupelist.Add(current);
+                        }
+                        last = current;
+                        current = current.Next;
+                    } while (current != null && !dupelist.Contains(current));
+                }
             }
 
             if (undocreated) {
@@ -252,6 +281,33 @@ namespace TriDelta.PathTools {
 
         private float lerp(float t, float p1, float p2) {
             return p1 + t * (p2 - p1);
+        }
+
+        private float MeasureArcLength(PathNode p1)
+        {
+            int slices = 10;
+            float step = 1f / slices;
+            float t = 0;
+            float length = 0;
+            Vector3D last;
+
+            //Must have enough points to construct the arc
+            if (p1 == null || p1.Next == null || p1.Next.Next == null || p1.Next.Next.Next == null)
+                return 0;
+
+            last = p1.Next.Position;
+            for (int i = 1; i <= slices; i++) {
+                t = step * i;
+                Vector3D p = new Vector3D(
+                   splerp(t, p1.Position.x, p1.Next.Position.x, p1.Next.Next.Position.x, p1.Next.Next.Next.Position.x),
+                   splerp(t, p1.Position.y, p1.Next.Position.y, p1.Next.Next.Position.y, p1.Next.Next.Next.Position.y),
+                   splerp(t, p1.Position.z, p1.Next.Position.z, p1.Next.Next.Position.z, p1.Next.Next.Next.Position.z)
+                );
+                length += (p - last).GetLength();
+                last = p;
+            }
+
+            return length;
         }
 
         private void cmdCreateThings_Click(object sender, EventArgs e) {

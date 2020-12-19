@@ -41,6 +41,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtRetagStart = new System.Windows.Forms.TextBox();
             this.grpCreateThings = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.txtHOffset = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtZOffset = new System.Windows.Forms.TextBox();
@@ -55,10 +57,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.rApplyZPitch = new System.Windows.Forms.RadioButton();
             this.rApplyZRoll = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.rLineTypeSpline = new System.Windows.Forms.RadioButton();
-            this.rLineTypeLinear = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.txtAngleOffset = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -75,15 +73,16 @@
             this.chkMassLinkNodes = new System.Windows.Forms.CheckBox();
             this.txtCoordList = new System.Windows.Forms.TextBox();
             this.cmdCreateEnMasse = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.grpLineType = new System.Windows.Forms.GroupBox();
+            this.rLineTypeSpline = new System.Windows.Forms.RadioButton();
+            this.rLineTypeLinear = new System.Windows.Forms.RadioButton();
             this.groupBox2.SuspendLayout();
             this.grpCreateThings.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.grpAdjustments.SuspendLayout();
             this.grpMassCreate.SuspendLayout();
+            this.grpLineType.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdAdjustSpeed
@@ -170,9 +169,9 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtRetagStart);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(3, 246);
+            this.groupBox2.Location = new System.Drawing.Point(3, 293);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(278, 62);
+            this.groupBox2.Size = new System.Drawing.Size(280, 62);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Retag Path";
@@ -213,7 +212,6 @@
             this.grpCreateThings.Controls.Add(this.panel3);
             this.grpCreateThings.Controls.Add(this.cmdSelectThingType);
             this.grpCreateThings.Controls.Add(this.panel2);
-            this.grpCreateThings.Controls.Add(this.panel1);
             this.grpCreateThings.Controls.Add(this.label6);
             this.grpCreateThings.Controls.Add(this.txtAngleOffset);
             this.grpCreateThings.Controls.Add(this.label5);
@@ -222,12 +220,30 @@
             this.grpCreateThings.Controls.Add(this.label4);
             this.grpCreateThings.Controls.Add(this.cmdCreateThings);
             this.grpCreateThings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpCreateThings.Location = new System.Drawing.Point(3, 100);
+            this.grpCreateThings.Location = new System.Drawing.Point(3, 147);
             this.grpCreateThings.Name = "grpCreateThings";
-            this.grpCreateThings.Size = new System.Drawing.Size(278, 146);
+            this.grpCreateThings.Size = new System.Drawing.Size(280, 146);
             this.grpCreateThings.TabIndex = 26;
             this.grpCreateThings.TabStop = false;
             this.grpCreateThings.Text = "Create Things";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(143, 3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 13);
+            this.label14.TabIndex = 39;
+            this.label14.Text = "Offsets:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(187, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(38, 13);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "Height";
             // 
             // txtHOffset
             // 
@@ -260,15 +276,15 @@
             this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.rPlaceMiddle);
             this.panel3.Controls.Add(this.rPlaceBottom);
-            this.panel3.Location = new System.Drawing.Point(126, 58);
+            this.panel3.Location = new System.Drawing.Point(9, 58);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(146, 38);
+            this.panel3.Size = new System.Drawing.Size(161, 38);
             this.panel3.TabIndex = 34;
             // 
             // rPlaceTop
             // 
             this.rPlaceTop.AutoSize = true;
-            this.rPlaceTop.Location = new System.Drawing.Point(98, 16);
+            this.rPlaceTop.Location = new System.Drawing.Point(103, 16);
             this.rPlaceTop.Name = "rPlaceTop";
             this.rPlaceTop.Size = new System.Drawing.Size(44, 17);
             this.rPlaceTop.TabIndex = 19;
@@ -287,7 +303,7 @@
             // rPlaceMiddle
             // 
             this.rPlaceMiddle.AutoSize = true;
-            this.rPlaceMiddle.Location = new System.Drawing.Point(51, 16);
+            this.rPlaceMiddle.Location = new System.Drawing.Point(55, 16);
             this.rPlaceMiddle.Name = "rPlaceMiddle";
             this.rPlaceMiddle.Size = new System.Drawing.Size(42, 17);
             this.rPlaceMiddle.TabIndex = 17;
@@ -298,7 +314,7 @@
             // 
             this.rPlaceBottom.AutoSize = true;
             this.rPlaceBottom.Checked = true;
-            this.rPlaceBottom.Location = new System.Drawing.Point(8, 16);
+            this.rPlaceBottom.Location = new System.Drawing.Point(6, 16);
             this.rPlaceBottom.Name = "rPlaceBottom";
             this.rPlaceBottom.Size = new System.Drawing.Size(41, 17);
             this.rPlaceBottom.TabIndex = 16;
@@ -350,7 +366,7 @@
             // 
             this.rApplyZPitch.AutoSize = true;
             this.rApplyZPitch.Checked = true;
-            this.rApplyZPitch.Location = new System.Drawing.Point(4, 16);
+            this.rApplyZPitch.Location = new System.Drawing.Point(5, 16);
             this.rApplyZPitch.Name = "rApplyZPitch";
             this.rApplyZPitch.Size = new System.Drawing.Size(49, 17);
             this.rApplyZPitch.TabIndex = 20;
@@ -368,48 +384,6 @@
             this.rApplyZRoll.TabIndex = 21;
             this.rApplyZRoll.Text = "Roll";
             this.rApplyZRoll.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.rLineTypeSpline);
-            this.panel1.Controls.Add(this.rLineTypeLinear);
-            this.panel1.Location = new System.Drawing.Point(10, 58);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(109, 38);
-            this.panel1.TabIndex = 31;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 13);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Path Type";
-            // 
-            // rLineTypeSpline
-            // 
-            this.rLineTypeSpline.AutoSize = true;
-            this.rLineTypeSpline.Checked = true;
-            this.rLineTypeSpline.Location = new System.Drawing.Point(55, 16);
-            this.rLineTypeSpline.Name = "rLineTypeSpline";
-            this.rLineTypeSpline.Size = new System.Drawing.Size(54, 17);
-            this.rLineTypeSpline.TabIndex = 17;
-            this.rLineTypeSpline.TabStop = true;
-            this.rLineTypeSpline.Text = "Spline";
-            this.rLineTypeSpline.UseVisualStyleBackColor = true;
-            // 
-            // rLineTypeLinear
-            // 
-            this.rLineTypeLinear.AutoSize = true;
-            this.rLineTypeLinear.Location = new System.Drawing.Point(3, 16);
-            this.rLineTypeLinear.Name = "rLineTypeLinear";
-            this.rLineTypeLinear.Size = new System.Drawing.Size(54, 17);
-            this.rLineTypeLinear.TabIndex = 16;
-            this.rLineTypeLinear.Text = "Linear";
-            this.rLineTypeLinear.UseVisualStyleBackColor = true;
-            this.rLineTypeLinear.CheckedChanged += new System.EventHandler(this.rLineTypeLinear_CheckedChanged);
             // 
             // label6
             // 
@@ -485,9 +459,9 @@
             this.grpAdjustments.Controls.Add(this.label2);
             this.grpAdjustments.Controls.Add(this.txtUnitLength);
             this.grpAdjustments.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpAdjustments.Location = new System.Drawing.Point(3, 3);
+            this.grpAdjustments.Location = new System.Drawing.Point(3, 50);
             this.grpAdjustments.Name = "grpAdjustments";
-            this.grpAdjustments.Size = new System.Drawing.Size(278, 97);
+            this.grpAdjustments.Size = new System.Drawing.Size(280, 97);
             this.grpAdjustments.TabIndex = 27;
             this.grpAdjustments.TabStop = false;
             this.grpAdjustments.Text = "Adjustments";
@@ -518,9 +492,9 @@
             this.grpMassCreate.Controls.Add(this.txtCoordList);
             this.grpMassCreate.Controls.Add(this.cmdCreateEnMasse);
             this.grpMassCreate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpMassCreate.Location = new System.Drawing.Point(3, 308);
+            this.grpMassCreate.Location = new System.Drawing.Point(3, 355);
             this.grpMassCreate.Name = "grpMassCreate";
-            this.grpMassCreate.Size = new System.Drawing.Size(278, 116);
+            this.grpMassCreate.Size = new System.Drawing.Size(280, 116);
             this.grpMassCreate.TabIndex = 28;
             this.grpMassCreate.TabStop = false;
             this.grpMassCreate.Text = "Mass Node Maker (paste coords)";
@@ -571,33 +545,50 @@
             this.cmdCreateEnMasse.UseVisualStyleBackColor = true;
             this.cmdCreateEnMasse.Click += new System.EventHandler(this.cmdCreateEnMasse_Click);
             // 
-            // label13
+            // grpLineType
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(187, 16);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 13);
-            this.label13.TabIndex = 38;
-            this.label13.Text = "Height";
+            this.grpLineType.Controls.Add(this.rLineTypeSpline);
+            this.grpLineType.Controls.Add(this.rLineTypeLinear);
+            this.grpLineType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpLineType.Location = new System.Drawing.Point(3, 3);
+            this.grpLineType.Name = "grpLineType";
+            this.grpLineType.Size = new System.Drawing.Size(280, 47);
+            this.grpLineType.TabIndex = 29;
+            this.grpLineType.TabStop = false;
+            this.grpLineType.Text = "Line Type";
             // 
-            // label14
+            // rLineTypeSpline
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(143, 3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(43, 13);
-            this.label14.TabIndex = 39;
-            this.label14.Text = "Offsets:";
+            this.rLineTypeSpline.AutoSize = true;
+            this.rLineTypeSpline.Checked = true;
+            this.rLineTypeSpline.Location = new System.Drawing.Point(70, 19);
+            this.rLineTypeSpline.Name = "rLineTypeSpline";
+            this.rLineTypeSpline.Size = new System.Drawing.Size(54, 17);
+            this.rLineTypeSpline.TabIndex = 19;
+            this.rLineTypeSpline.TabStop = true;
+            this.rLineTypeSpline.Text = "Spline";
+            this.rLineTypeSpline.UseVisualStyleBackColor = true;
+            // 
+            // rLineTypeLinear
+            // 
+            this.rLineTypeLinear.AutoSize = true;
+            this.rLineTypeLinear.Location = new System.Drawing.Point(10, 19);
+            this.rLineTypeLinear.Name = "rLineTypeLinear";
+            this.rLineTypeLinear.Size = new System.Drawing.Size(54, 17);
+            this.rLineTypeLinear.TabIndex = 18;
+            this.rLineTypeLinear.Text = "Linear";
+            this.rLineTypeLinear.UseVisualStyleBackColor = true;
             // 
             // fTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 425);
+            this.ClientSize = new System.Drawing.Size(286, 474);
             this.Controls.Add(this.grpMassCreate);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grpCreateThings);
             this.Controls.Add(this.grpAdjustments);
+            this.Controls.Add(this.grpLineType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "fTools";
             this.Padding = new System.Windows.Forms.Padding(3);
@@ -610,12 +601,12 @@
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.grpAdjustments.ResumeLayout(false);
             this.grpAdjustments.PerformLayout();
             this.grpMassCreate.ResumeLayout(false);
             this.grpMassCreate.PerformLayout();
+            this.grpLineType.ResumeLayout(false);
+            this.grpLineType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -640,10 +631,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RadioButton rApplyZPitch;
         private System.Windows.Forms.RadioButton rApplyZRoll;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RadioButton rLineTypeSpline;
-        private System.Windows.Forms.RadioButton rLineTypeLinear;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtAngleOffset;
         private System.Windows.Forms.Label label5;
@@ -671,5 +658,8 @@
         private System.Windows.Forms.TextBox txtHOffset;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.GroupBox grpLineType;
+        private System.Windows.Forms.RadioButton rLineTypeSpline;
+        private System.Windows.Forms.RadioButton rLineTypeLinear;
     }
 }
