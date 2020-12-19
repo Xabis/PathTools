@@ -20,6 +20,8 @@ namespace TriDelta.PathTools {
 
             chkAdjustAngle.Checked = General.Settings.ReadPluginSetting("adjangle", true);
             chkAdjustPitch.Checked = General.Settings.ReadPluginSetting("adjpitch", true);
+            chkUnusedOnly.Checked = General.Settings.ReadPluginSetting("unusedonly", true);
+
             txtUnitTime.Text = General.Settings.ReadPluginSetting("adjtics", 8).ToString();
             txtUnitLength.Text = General.Settings.ReadPluginSetting("adjlen", 1024).ToString();
             txtCreateType.Text = General.Settings.ReadPluginSetting("thingtype", 1).ToString();
@@ -572,27 +574,75 @@ namespace TriDelta.PathTools {
                 return;
             }
 
-            General.Map.UndoRedo.CreateUndo("Retag path");
-            foreach (List<PathNode> path in paths) {
-                //filter interpolation points for faster lookup during path processing
-                List<Thing> ip = new List<Thing>();
-                foreach(Thing t in General.Map.Map.Things) {
-                    if (t.Type == 9070)
-                        ip.Add(t);
-                }
+            if (!chkUnusedOnly.Checked && paths.Count > 1) {
+                MessageBox.Show("You may only have one path selected for retagging, when opting to clobber tids.");
+                return;
+            }
 
+            General.Settings.WritePluginSetting("unusedonly", chkUnusedOnly.Checked);
+            General.Map.UndoRedo.CreateUndo("Retag path");
+
+            //filter interpolation points for faster lookup during path processing
+            List<Thing> ip = new List<Thing>();
+            List<Thing> ip_specials = new List<Thing>();
+            List<Thing> ip_movers = new List<Thing>();
+            foreach (Thing t in General.Map.Map.Things) {
+                if (t.Type == 9070)
+                    ip.Add(t);
+                if (t.Type == 9075)
+                    ip_specials.Add(t);
+                if (t.Type == 9071)     //path follower
+                    ip_movers.Add(t);
+                if (t.Type == 9072)     //moving camera
+                    ip_movers.Add(t);
+                if (t.Type == 9074)     //actor mover
+                    ip_movers.Add(t);
+            }
+
+            void doretag(List<PathNode> path, int tid, bool unusedonly)
+            {
                 //Retag each node in the path
-                foreach(PathNode node in path) {
+                int i = tid;
+                foreach (PathNode node in path) {
                     int old = node.ID;
-                    newtag = node.ID = GetNextUnusedTag(newtag);
+                    if (unusedonly) {
+                        tid = GetNextUnusedTag(tid);
+                    } else {
+                        tid = i;
+                    }
+                    node.ID = tid;
 
                     //if any ip (anywhere) is pointing to this node, then update it
                     if (old > 0) {
-                        foreach(Thing t in ip) {
-                            if (t.Args[3] == old)
-                                t.Args[3] = newtag;
+                        //Update any ip's pointing to this node
+                        foreach (Thing t in ip) {
+                            if (t.Args[3] == old) {
+                                t.Args[3] = tid;
+                            }
+                        }
+
+                        //Update any assigned ip specials
+                        foreach (Thing t in ip_specials) {
+                            if (t.Tag == old) {
+                                t.Tag = tid;
+                            }
+                        }
+
+                        //Update any assigned ip movers
+                        foreach (Thing t in ip_movers) {
+                            if (t.Args[0] == old) {
+                                t.Args[0] = tid;
+                            }
                         }
                     }
+                    i++;
+                }
+            }
+
+            foreach (List<PathNode> path in paths) {
+                doretag(path, newtag, true);
+                if (!chkUnusedOnly.Checked) {
+                    doretag(path, newtag, false);
                 }
             }
 

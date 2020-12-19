@@ -76,6 +76,7 @@
             this.grpLineType = new System.Windows.Forms.GroupBox();
             this.rLineTypeSpline = new System.Windows.Forms.RadioButton();
             this.rLineTypeLinear = new System.Windows.Forms.RadioButton();
+            this.chkUnusedOnly = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.grpCreateThings.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -165,6 +166,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkUnusedOnly);
             this.groupBox2.Controls.Add(this.cmdRetag);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtRetagStart);
@@ -579,6 +581,16 @@
             this.rLineTypeLinear.Text = "Linear";
             this.rLineTypeLinear.UseVisualStyleBackColor = true;
             // 
+            // chkUnusedOnly
+            // 
+            this.chkUnusedOnly.AutoSize = true;
+            this.chkUnusedOnly.Location = new System.Drawing.Point(137, 12);
+            this.chkUnusedOnly.Name = "chkUnusedOnly";
+            this.chkUnusedOnly.Size = new System.Drawing.Size(135, 17);
+            this.chkUnusedOnly.TabIndex = 3;
+            this.chkUnusedOnly.Text = "Use Only Unused TIDs";
+            this.chkUnusedOnly.UseVisualStyleBackColor = true;
+            // 
             // fTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -661,5 +673,6 @@
         private System.Windows.Forms.GroupBox grpLineType;
         private System.Windows.Forms.RadioButton rLineTypeSpline;
         private System.Windows.Forms.RadioButton rLineTypeLinear;
+        private System.Windows.Forms.CheckBox chkUnusedOnly;
     }
 }
